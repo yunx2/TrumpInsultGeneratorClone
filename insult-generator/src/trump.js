@@ -355,11 +355,13 @@ const insults = {
     " But watch – I will win!",
     " DISGRACE!",
     " Big stuff!"
-
-
-  ]
-
-
+  ],
+  "niceQuotes": [
+    "What a beautiful person!",
+    "That one should be our president!",
+    "I know the best people. And that's one of them.",
+    "Fantastic, yuge potential!"
+]
 }
 
 export default insults
