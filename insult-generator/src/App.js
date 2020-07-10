@@ -10,12 +10,14 @@ import Nav from 'react-bootstrap/Nav'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
+import Navbar from 'react-bootstrap/Navbar'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
 import InputGroup from 'react-bootstrap/InputGroup'
 
-
-
 import axios from 'axios'
-import { FormLabel } from 'react-bootstrap';
 
 function App() {
   const [name, setName] = useState('')
@@ -27,7 +29,7 @@ function App() {
     setName(e.target.value)
   }
 
-  const  handleClick = async () => {
+  const handleClick = async () => {
     try {
       const response = await axios.post('http://localhost:3001/', { "name": name })
       console.log(response)
@@ -39,7 +41,13 @@ function App() {
 
   return (
     <div className="App">
-      <Container fluid>
+      <Navbar as="div" role="navigation" className="border-bottom border-secondary">
+        <Nav>
+          <Nav.Link href="#">Home</Nav.Link>
+          <Nav.Link href="#">Legal</Nav.Link>
+        </Nav>
+      </Navbar>
+      <Container fluid className="bg-light">
         <h1 className="display-4">
           <p className="text-center">Trump Insult Generator</p>
         </h1>
@@ -53,12 +61,23 @@ function App() {
               <Form.Label>Name: </Form.Label>
               <Form.Control type="text" onChange={handleNameChange} placeholder="Enter name" />
               </span>
-              
             </Form.Group>
-            <Button variant="primary" onClick={handleClick}>Generate Insult</Button>
-            <Form.Control as="textarea" rows="5" className="mt-3"/>
-
+            <Button variant="primary" onClick={handleClick} className="float-left">Generate Insult</Button>
+            <ButtonGroup className="float-right">
+              <Button variant="outline-primary"><i className="fas fa-volume-up"></i></Button>
+              <DropdownButton alignRight title="" variant="outline-primary">
+                <Dropdown.Item as="button">Action</Dropdown.Item>
+                <Dropdown.Item as="button">Action</Dropdown.Item>
+                <Dropdown.Item as="button">Action</Dropdown.Item>
+                <Dropdown.Item as="button">Action</Dropdown.Item>
+                <Dropdown.Item as="button">Action</Dropdown.Item>
+                <Dropdown.Item as="button">Action</Dropdown.Item>
+              </DropdownButton>
+              <Button variant="outline-primary" className="ml-2"><i className="far fa-envelope"></i></Button>
+            </ButtonGroup>
+            <Form.Control as="textarea" rows="9" readOnly />
           </Col>
+          
         </Row>
       </Container>
     </div>)
