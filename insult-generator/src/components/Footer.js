@@ -5,7 +5,7 @@ const Footer = () => {
     <div>
       <footer className="border-top">
         <p className="form-text text-muted">© 2020 - TrumpInsultGenerator.com - 
-          <a className="text-dark" href="#">Legal</a>
+          <a className="text-dark" href="#"> Legal</a>
         </p> 
       </footer>
     </div>

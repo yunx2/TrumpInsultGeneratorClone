@@ -41,7 +41,7 @@ function App() {
            <img src="https://www.trumpinsultgenerator.com/images/Trump.jpg" className="img-fluid" alt="trump"/>
           </div>
           <div className="col">
-            <Form handleClick={handleClick} handleChange={handleNameChange} />
+            <Form handleClick={handleClick} handleChange={handleNameChange} insult={insult}/>
           </div>
         </div>
         <Sharebar />
