@@ -38,7 +38,7 @@ function App() {
         </h1>
         <div className="row">
           <div className="col">
-           <img src="https://trumpinsultgenerator.com/images/Trump.jpg" className="img-fluid" alt="trump"/>
+           <img src="https://www.trumpinsultgenerator.com/images/Trump.jpg" className="img-fluid" alt="trump"/>
           </div>
           <div className="col">
             <Form handleClick={handleClick} handleChange={handleNameChange} />
