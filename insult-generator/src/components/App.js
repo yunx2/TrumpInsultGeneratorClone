@@ -13,6 +13,7 @@ import axios from 'axios'
 function App() {
   const [name, setName] = useState('')
   const [insult, setInsult] = useState('')
+  const [insultId, setInsultId] = useState(null)
   // const [insultType, setInsultType] = useState(null)
 
   const handleNameChange = e => {
@@ -25,6 +26,7 @@ function App() {
       const response = await axios.post('http://localhost:3001/', { "name": name })
       console.log(response)
       setInsult(response.data)
+      window.history.replaceState(null,'',`/?name=${name}`)
     } catch (error) {
       console.log(error) 
     }
