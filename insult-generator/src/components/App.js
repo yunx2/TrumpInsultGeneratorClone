@@ -30,11 +30,8 @@ function App() {
     }
   }
 
-  const imgs = []
-  const links = []
-
   return (
-    <div className="App container-fluid">
+    <div className="App container">
       <Navbar />
         <h1 className="display-4">
           <p className="text-center">Trump Insult Generator</p>
@@ -47,7 +44,7 @@ function App() {
             <Form handleClick={handleClick} handleChange={handleNameChange} />
           </div>
         </div>
-        <Sharebar imgs={imgs} links={links}/>
+        <Sharebar />
         <Footer />
     </div>)
 }

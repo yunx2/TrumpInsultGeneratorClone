@@ -1,13 +1,32 @@
 import React from 'react'
-import ShareButton from './ShareButton'
+import {
+EmailShareButton,
+FacebookShareButton,
+LinkedinShareButton,
+PinterestShareButton,
+TwitterShareButton,
+WhatsappShareButton
+} from 'react-share'
 
-const Sharebar = ({ imgs, links }) => {
+import {
+  EmailIcon,
+  FacebookIcon,
+  LinkedinIcon,
+  PinterestIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from 'react-share'
 
+const Sharebar = () => {
   return (
     <div>
-      <ShareButton />
+      <EmailShareButton url={window.location}><EmailIcon /></EmailShareButton>
+      <FacebookShareButton url={window.location}><FacebookIcon /></FacebookShareButton> 
+      <LinkedinShareButton url={window.location}><LinkedinIcon /></LinkedinShareButton>
+      <PinterestShareButton url={window.location}><PinterestIcon /></PinterestShareButton>
+      <TwitterShareButton url={window.location}><TwitterIcon /></TwitterShareButton>
+      <WhatsappShareButton url={window.location}><WhatsappIcon /></WhatsappShareButton>
     </div>
-    
   )
 }
 
