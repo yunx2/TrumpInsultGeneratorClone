@@ -24,14 +24,15 @@ function App() {
   const handleClick = async () => {
     try {
       const response = await axios.post('http://localhost:3001/', { "name": name })
-      console.log(response)
-      setInsult(response.data)
-      window.history.replaceState(null,'',`/?name=${name}`)
+      const { insult, hexId } = response.data
+      console.log(response.data)
+      setInsult(insult)
+      setInsultId(hexId)
+      window.history.replaceState(null,'',`/?name=${name}&id=${insultId}`)
     } catch (error) {
       console.log(error) 
-    }
+    } 
   }
-
   return (
     <div className="App container">
       <Navbar />
