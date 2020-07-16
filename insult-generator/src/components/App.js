@@ -1,5 +1,5 @@
 /* eslint-disable default-case */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,7 +14,6 @@ function App() {
   const [name, setName] = useState('')
   const [insult, setInsult] = useState('')
   const [insultId, setInsultId] = useState(null)
-  // const [insultType, setInsultType] = useState(null)
 
   const handleNameChange = e => {
     e.preventDefault()
@@ -23,12 +22,17 @@ function App() {
 
   const handleClick = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/', { "name": name })
-      const { insult, hexId } = response.data
-      console.log(response.data)
-      setInsult(insult)
-      setInsultId(hexId)
-      window.history.replaceState(null,'',`/?name=${name}&id=${insultId}`)
+      if (name) {
+        const response = await axios.post('http://localhost:3001/', { "name": name })
+        const { insult, hexId } = response.data
+        console.log(response.data)
+        setInsult(insult)
+        setInsultId(hexId)
+        window.history.replaceState(null,'',`/?name=${name}&id=${hexId}`)
+      } else {
+        window.history.replaceState(null,'','')
+        console.log('enter name')
+      }
     } catch (error) {
       console.log(error) 
     } 
