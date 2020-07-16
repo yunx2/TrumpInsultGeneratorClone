@@ -16,15 +16,18 @@ function App() {
   const [insultId, setInsultId] = useState(null)
 
   useEffect(() => {
-    if (location.search) {
-      const url = 'http://localhost:3001/' + location.search
-    }
+    if (window.location.search) {
+      axios.get('http://localhost:3001/' + window.location.search)
+        .then(response => {
+          const fetchedInsult = response.data         
+          setInsult(fetchedInsult)
+        })
+        .catch(exception => {
+          alert('request failed')
+        })
+      }
   }, []);
   
-  const getInsult = async (url) => {
-    const response = await axios.get(url)
-    const { insult } = response.data
-  }
 
   const handleNameChange = e => {
     e.preventDefault()
