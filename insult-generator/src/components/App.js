@@ -19,8 +19,11 @@ function App() {
     if (window.location.search) {
       axios.get('http://localhost:3001/' + window.location.search)
         .then(response => {
-          const fetchedInsult = response.data         
+          const fetchedInsult = response.data.insult 
+          const fetchedName = response.data.formatted        
           setInsult(fetchedInsult)
+          setName(fetchedName)
+          console.log(response.data)
         })
         .catch(exception => {
           alert('request failed')
@@ -28,7 +31,6 @@ function App() {
       }
   }, []);
   
-
   const handleNameChange = e => {
     e.preventDefault()
     setName(e.target.value)
@@ -62,7 +64,8 @@ function App() {
            <img src="https://www.trumpinsultgenerator.com/images/Trump.jpg" className="img-fluid" alt="trump"/>
           </div>
           <div className="col">
-            <Form handleClick={handleClick} handleChange={handleNameChange} insult={insult}/>
+         
+            <Form handleClick={handleClick} handleChange={handleNameChange} insult={insult} name={name} />
           </div>
         </div>
         <Sharebar />
