@@ -4,9 +4,6 @@ import {
   BrowserRouter, 
   Switch,
   Route,
-  Link,
-  useLocation,
-  useHistory
 } from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
