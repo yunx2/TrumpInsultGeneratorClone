@@ -10,7 +10,7 @@ const Form = ({ handleClick, insult, name, handleChange }) => {
       <button type="button" className="btn btn-primary float-left" onClick={handleClick}>
         Generate Insult
       </button>
-      <Buttonbar />
+      <Buttonbar insult={insult}/>
       <textarea className="form-control" rows="8" value={insult} readOnly>
       </textarea> 
     </form>

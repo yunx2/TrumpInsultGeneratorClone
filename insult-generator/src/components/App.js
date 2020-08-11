@@ -1,11 +1,11 @@
 /* eslint-disable default-case */
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import {
   BrowserRouter, 
   Switch,
   Route,
 } from 'react-router-dom'
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Navbar from './Navbar'
@@ -14,17 +14,14 @@ import Footer from './Footer'
 import Sharebar from './ShareBar'
 import Legal from './Legal'
 
-import axios from 'axios'
-
 function App() {
   const [name, setName] = useState('')
   const [insult, setInsult] = useState('')
   const [insultId, setInsultId] = useState(null)
 
-
   useEffect(() => {
     if (window.location.search) {
-      axios.get('/insult' + window.location.search)
+      axios.get('http://localhost:3001/insult' + window.location.search)
         .then(response => {
           const fetchedInsult = response.data.insult 
           const fetchedName = response.data.formatted        
@@ -46,7 +43,7 @@ function App() {
   const handleClick = async () => {
     try {
       if (name) {
-        const response = await axios.post('/' , { "name": name })
+        const response = await axios.post('http://localhost:3001/' , { "name": name })
         const { insult, hexId } = response.data
         console.log(response.data)
         setInsult(insult)
@@ -58,9 +55,10 @@ function App() {
         console.log('enter name')
       }
     } catch (error) {
-      console.log('error',error) 
+      console.log('error:',error) 
     } 
   }
+
   return (
     <div className="App container">
       <h1 className="display-4">
