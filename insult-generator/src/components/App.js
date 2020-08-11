@@ -13,7 +13,6 @@ import Form from './Form'
 import Footer from './Footer'
 import Sharebar from './ShareBar'
 import Legal from './Legal'
-// import Audio from './Audio'
 
 function App() {
   const [name, setName] = useState('')
@@ -59,8 +58,6 @@ function App() {
       console.log('error:',error) 
     } 
   }
-
-
   return (
     <div className="App container">
       <h1 className="display-4">

@@ -4,7 +4,6 @@ import axios from 'axios'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Button from 'react-bootstrap/Button'
-import DropdownItem from 'react-bootstrap/esm/DropdownItem'
 
 const voiceOptions = [
   '{"voice":"en-AU","gender":"FEMALE"}',
@@ -20,16 +19,24 @@ const parsed = voiceOptions.map(current => JSON.parse(current))
 
 const Form = ({ handleClick, insult, name, handleChange }) => {
   const [audioData, setAudioData] = useState('')
+  const [selection, setSelection] = useState(null)
 
-  const handleSpeech = async voiceOption => {
+  const handleSpeech = async () => {
+    const { voice, gender } = selection
     const requestBody = {
       text: insult,
-      language: voiceOption.voice || 'en-US',
-      gender: voiceOption.gender || 'MALE'
+      language: voice,
+      gender 
     }
-    const response = await axios.post('http://localhost:3001/speak', requestBody)
-    const audioString = response.data
-    setAudioData(audioString)
+    console.log('body', requestBody)
+    // const response = await axios.post('http://localhost:3001/speak', requestBody)
+    // const audioString = response.data
+    // setAudioData(audioString)
+  }
+  const handleSelect = (eventkey) => {
+    const selected = parsed[eventkey]
+    setSelection(selected)
+    console.log('eventKey:', selected,)
   }
   return (
     <form>
@@ -47,7 +54,7 @@ const Form = ({ handleClick, insult, name, handleChange }) => {
       <Dropdown.Toggle split variant="outline-primary" id="dropdown-split-basic" />
         <Dropdown.Menu alignRight>
         {parsed.map((current, index) => (
-          <Dropdown.Item key={index} as="button" type="button">
+          <Dropdown.Item eventKey={index} onSelect={eventKey => handleSelect(eventKey)}as="button" type="button">
             {current.voice} - {current.gender}
           </Dropdown.Item>
         ))}
@@ -56,15 +63,10 @@ const Form = ({ handleClick, insult, name, handleChange }) => {
           <i className="far fa-envelope"></i>
         </button>
       </Dropdown>
-      
       <textarea className="form-control" rows="8" value={insult} readOnly>
       </textarea> 
-
     </form>
   )
 }
-
-            
-
 
 export default Form
