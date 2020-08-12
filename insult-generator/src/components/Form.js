@@ -19,18 +19,17 @@ const parsed = voiceOptions.map(current => JSON.parse(current))
 
 const Form = ({ handleClick, insult, name, handleChange }) => {
   const [audioData, setAudioData] = useState('')
-  const [selection, setSelection] = useState(null)
+  const [selection, setSelection] = useState([])
 
   const handleSpeech = async () => {
-    if (selection) {
-      console.log('parsed:', parsed)
-      const { voice, gender } = selection
+    if (selection.length > 0) {
+      const [ voice, gender ] = selection
       const requestBody = {
         text: insult,
         language: voice,
         gender 
       }
-      console.log('body', requestBody)
+      // console.log('body', requestBody)
       const response = await axios.post('http://localhost:3001/speak', requestBody)
       const audioString = response.data
       setAudioData(audioString)
@@ -39,10 +38,9 @@ const Form = ({ handleClick, insult, name, handleChange }) => {
     }
   }
   const handleSelect = (eventKey) => {
-    const index = eventKey + 0
-    const selected = parsed[index]
-    setSelection(selected)
-    console.log('eventKey:', index)
+    const split = eventKey.split(',')
+    setSelection(split)
+    console.log('voice:', split[0], 'isArray:', Array.isArray(split) )
   }
   return (
     <form>
@@ -59,9 +57,9 @@ const Form = ({ handleClick, insult, name, handleChange }) => {
         <Button type="button" variant="outline-primary" onClick={handleSpeech}><i className="fas fa-volume-up" /></Button>
       <Dropdown.Toggle split variant="outline-primary" id="dropdown-split-basic" />
         <Dropdown.Menu alignRight>
-        {parsed.map((current, index) => (
-          <Dropdown.Item eventKey={index} key={index} onSelect={eventKey => handleSelect(eventKey)} as="button" type="button">
-            {current.voice} - {current.gender}
+        {parsed.map(({voice, gender}, index) => (
+          <Dropdown.Item eventKey={[voice, gender]} key={index} onSelect={handleSelect} as="button" type="button">
+            {voice} - {gender}
           </Dropdown.Item>
         ))}
         </Dropdown.Menu>
