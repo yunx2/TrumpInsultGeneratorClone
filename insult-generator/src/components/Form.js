@@ -22,21 +22,27 @@ const Form = ({ handleClick, insult, name, handleChange }) => {
   const [selection, setSelection] = useState(null)
 
   const handleSpeech = async () => {
-    const { voice, gender } = selection
-    const requestBody = {
-      text: insult,
-      language: voice,
-      gender 
+    if (selection) {
+      console.log('parsed:', parsed)
+      const { voice, gender } = selection
+      const requestBody = {
+        text: insult,
+        language: voice,
+        gender 
+      }
+      console.log('body', requestBody)
+      const response = await axios.post('http://localhost:3001/speak', requestBody)
+      const audioString = response.data
+      setAudioData(audioString)
+    } else {
+      console.log('selection a voice option')
     }
-    console.log('body', requestBody)
-    // const response = await axios.post('http://localhost:3001/speak', requestBody)
-    // const audioString = response.data
-    // setAudioData(audioString)
   }
-  const handleSelect = (eventkey) => {
-    const selected = parsed[eventkey]
+  const handleSelect = (eventKey) => {
+    const index = eventKey + 0
+    const selected = parsed[index]
     setSelection(selected)
-    console.log('eventKey:', selected,)
+    console.log('eventKey:', index)
   }
   return (
     <form>
@@ -54,7 +60,7 @@ const Form = ({ handleClick, insult, name, handleChange }) => {
       <Dropdown.Toggle split variant="outline-primary" id="dropdown-split-basic" />
         <Dropdown.Menu alignRight>
         {parsed.map((current, index) => (
-          <Dropdown.Item eventKey={index} onSelect={eventKey => handleSelect(eventKey)}as="button" type="button">
+          <Dropdown.Item eventKey={index} key={index} onSelect={eventKey => handleSelect(eventKey)} as="button" type="button">
             {current.voice} - {current.gender}
           </Dropdown.Item>
         ))}
