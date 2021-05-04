@@ -49,7 +49,6 @@ function App() {
         setInsult(insult)
         setInsultId(hexId)
         window.history.replaceState(null,'',`?name=${name}&id=${hexId}`)
-        // console.log('window.location', window.location)
       } else {
         window.history.replaceState(null,'','')
         console.log('enter name')
@@ -58,6 +57,7 @@ function App() {
       console.log('error:',error) 
     } 
   }
+  
   return (
     <div className="App container">
       <h1 className="display-4">
