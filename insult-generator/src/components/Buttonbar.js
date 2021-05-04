@@ -31,7 +31,9 @@ const Buttonbar = ({ insult }) => {
 
   return (
     <Dropdown as={ButtonGroup} className="float-right">
-        <Button type="button" variant="outline-primary"><i className="fas fa-volume-up" /></Button>
+        <Button type="button" variant="outline-primary">
+          <i className="fas fa-volume-up" />
+        </Button>
       <Dropdown.Toggle split variant="outline-primary" id="dropdown-split-basic" />
         <Dropdown.Menu alignRight>
         {parsed.map((current, index) => (
@@ -41,9 +43,9 @@ const Buttonbar = ({ insult }) => {
         ))}
         </Dropdown.Menu>
         <button type="button" className="btn btn-outline-primary">
-          <i className="far fa-envelope"></i>
+          <i className="far fa-envelope" />
         </button> 
-      </Dropdown>
+    </Dropdown>
   )
 }
 

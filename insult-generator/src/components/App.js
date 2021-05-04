@@ -81,8 +81,8 @@ function App() {
             <div><Sharebar /></div>
           </Route>
         </Switch>
+        <Footer />
     </BrowserRouter>
-    <Footer />
   </div>)
 }
 

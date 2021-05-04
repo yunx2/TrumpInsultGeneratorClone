@@ -31,6 +31,7 @@ const Form = ({ handleClick, insult, name, handleChange }) => {
       }
       // console.log('body', requestBody)
       const response = await axios.post('http://localhost:3001/speak', requestBody)
+
       const audioString = response.data
       setAudioData(audioString)
     } else {
@@ -40,7 +41,7 @@ const Form = ({ handleClick, insult, name, handleChange }) => {
   const handleSelect = (eventKey) => {
     const split = eventKey.split(',')
     setSelection(split)
-    console.log('voice:', split[0], 'isArray:', Array.isArray(split) )
+    // console.log('voice:', split[0], 'isArray:', Array.isArray(split) )
   }
   return (
     <form>
@@ -50,11 +51,14 @@ const Form = ({ handleClick, insult, name, handleChange }) => {
         Generate Insult
       </button>
 
-      <audio display="none" autoPlay={true} src={`data:audio/mpeg;base64,${audioData}`} >cannot play
+      <audio display="none" autoPlay={true} src={`data:audio/mpeg;base64,${audioData}`}>
+        cannot play
       </audio>
 
       <Dropdown as={ButtonGroup} className="float-right">
-        <Button type="button" variant="outline-primary" onClick={handleSpeech}><i className="fas fa-volume-up" /></Button>
+        <Button type="button" variant="outline-primary" onClick={handleSpeech}>
+          <i className="fas fa-volume-up" />
+        </Button>
       <Dropdown.Toggle split variant="outline-primary" id="dropdown-split-basic" />
         <Dropdown.Menu alignRight>
         {parsed.map(({voice, gender}, index) => (
